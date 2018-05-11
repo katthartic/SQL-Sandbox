@@ -1,0 +1,31 @@
+/* Answer to Non-Correlated Subqueries I */
+SELECT * 
+FROM flights 
+WHERE origin IN (
+    SELECT code 
+    FROM airports 
+    WHERE elevation < 2000)
+LIMIT 2;
+
+/* Answer to Non-Correlated Subqueries II */
+SELECT *
+FROM flights
+WHERE origin IN (
+		SELECT code
+		FROM airports
+		WHERE faa_region = 'ASO')
+LIMIT 2;
+
+/* Answer to Non-Correlated Subqueries III */
+SELECT a.dep_month,
+  		 a.dep_day_of_week,
+   ROUND(AVG(a.flight_distance),2) AS average_distance
+FROM (
+			SELECT dep_month,
+  			 	 dep_day_of_week,
+           dep_date,
+           SUM(distance) AS flight_distance
+    	FROM flights
+    	GROUP BY 1,2,3) a
+GROUP BY 1,2
+ORDER BY 1,2;
