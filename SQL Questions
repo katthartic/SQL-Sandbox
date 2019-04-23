@@ -1,15 +1,15 @@
 /* These seem to all produce the same results, which is the better way to write this? */
 
-SELECT * FROM flights
-JOIN airports ON airports.code = flights.origin
-	AND airports.faa_region = 'ASO'
-  ORDER BY flights.id
+SELECT * FROM flights f
+JOIN airports a ON a.code = f.origin
+	AND a.faa_region = 'ASO'
+  ORDER BY f.id
   LIMIT 10;
   
-SELECT * FROM flights
-JOIN airports ON airports.code = flights.origin
-WHERE airports.faa_region = 'ASO'
-  ORDER BY flights.id
+SELECT * FROM flights f
+JOIN airports a ON a.code = f.origin
+WHERE a.faa_region = 'ASO'
+  ORDER BY f.id
   LIMIT 10;
   
 SELECT * FROM flights 
