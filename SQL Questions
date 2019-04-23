@@ -1,0 +1,21 @@
+/* These seem to all produce the same results, which is the better way to write this? */
+
+SELECT * FROM flights
+JOIN airports ON airports.code = flights.origin
+	AND airports.faa_region = 'ASO'
+  ORDER BY flights.id
+  LIMIT 10;
+  
+SELECT * FROM flights
+JOIN airports ON airports.code = flights.origin
+WHERE airports.faa_region = 'ASO'
+  ORDER BY flights.id
+  LIMIT 10;
+  
+SELECT * FROM flights 
+WHERE origin in (
+    SELECT code 
+    FROM airports 
+    WHERE faa_region = 'ASO')
+ORDER BY id
+LIMIT 10;
